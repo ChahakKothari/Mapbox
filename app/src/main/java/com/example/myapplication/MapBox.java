@@ -49,7 +49,7 @@ public class MapBox extends AppCompatActivity {
     private List<PointAnnotation> markerList = new ArrayList<>();
 
 
-    //private List<PointAnnotation> markerList = new ArrayList<>();
+   //permmision
     private final ActivityResultLauncher<String> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
         @Override
         public void onActivityResult(Boolean result) {
@@ -112,35 +112,36 @@ public class MapBox extends AppCompatActivity {
         }
 
         private void addMarker(double longitude, double latitude) {
-            // Validate longitude and latitude values
+            
             final double MIN_LONGITUDE = -180.0;
             final double MAX_LONGITUDE = 180.0;
             final double MIN_LATITUDE = -90.0;
             final double MAX_LATITUDE = 90.0;
 
-
-
             if (isValidCoordinate(longitude, latitude)) {
-                // Continue with marker creation
+                
                 PointAnnotationOptions options = new PointAnnotationOptions()
                         .withGeometry(Point.fromLngLat(longitude, latitude))
                         .withIconImage(ImageHolder.from(R.drawable.baseline_add_location_24));  // Replace with your marker icon ID
 
                 mapView.getMapboxMap().getStyle(style -> {
                     if (style != null) {
-                        // Add marker source and layer
+                        
                         String sourceId = "marker-source-id";
 
                         style.addImage(new GeoJsonSource(sourceId, options.geometry()));
-                        style.addImage(new SymbolLayer("marker-layer-id", sourceId);
+                        style.addImage(new SymbolLayer("baseline_add_location_24", sourceId);
                                 
                     } else {
-                        // Handle the case where the style is not loaded
+                       
                         Toast.makeText(this, "Map style not loaded", Toast.LENGTH_SHORT).show();
                     }
                 };
         }
         floatingActionButton.hide();
+            
+            //use custom map ,style satellite also...
+
         mapView.getMapboxMap().loadStyleUri("mapbox://styles/ckbai/cltpdfdgr002501pnh0zn1272", new Style.OnStyleLoaded() {
             @Override
             public void onStyleLoaded(@NonNull Style style) {
@@ -148,9 +149,6 @@ public class MapBox extends AppCompatActivity {
                 LocationComponentPlugin locationComponentPlugin = getLocationComponent(mapView);
                 locationComponentPlugin.setEnabled(true);
                 LocationPuck2D locationPuck2D = new LocationPuck2D();
-
-                // Drawable drawable = AppCompatResources.getDrawable(MapBox.this, R.drawable.baseline_add_location_24);
-
 
                 locationPuck2D.setBearingImage(ImageHolder.from(R.drawable.baseline_add_location_24));
 
@@ -170,4 +168,5 @@ public class MapBox extends AppCompatActivity {
         });
     }
 
-        }}}
+    }
+}
